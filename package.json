@@ -1,0 +1,40 @@
+{
+  "name": "jsapp",
+  "version": "1.0.0",
+  "description": "MyDiary App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "babel": "grunt babel",
+    "test": "mocha --require babel-polyfill --require babel-register"
+  },
+  "author": "Ayodeji Ojo",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "html2pug": "^2.0.1",
+    "mocha": "^5.2.0",
+    "nmp": "^1.0.3",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "grunt-babel": "^7.0.0",
+    "grunt": "^1.0.3",
+    "grunt-contrib-watch": "^1.1.0",
+    "load-grunt-tasks": "^4.0.0",
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "grunt-eslint": "^21.0.0",
+    "grunt-mocha-test": "^0.13.3",
+    "mocha": "^5.2.0"
+  }
+}
