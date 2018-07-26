@@ -14,14 +14,13 @@ const database = {
 		}],
 
 		users: [{
-				firstname: "first", lastname: "last", email: "email", password: "password"
+				firstName: "first", lastName: "last", email: "email", password: "password"
 		}],
 
 };
 
 
 app.post('/api/v1/entries', (req, res) =>{
-	
 	const { title, message } = req.body;
 	if (title === ' ' || message === ' ' ) {
 		res.status(422).json('Please fill fields');
@@ -31,7 +30,7 @@ app.post('/api/v1/entries', (req, res) =>{
 		res.status(201).json(database.entries);
 	} 
 	else {
-		res.status(400).json('Bad Request');
+		res.status(500).json('Bad Request');
 	}
 	
 });
@@ -39,11 +38,10 @@ app.post('/api/v1/entries', (req, res) =>{
 
 
 app.post('/api/v1/signup', (req, res) =>{
-	console.log(req.body);
-	const { firstname, lastname, email, password } = req.body;
-	if (firstname === ' ' || lastname === ' ' || email === ' ' || password === ' ') {
+	const { firstName, lastName, email, password } = req.body;
+	if (firstName === ' ' || lastName === ' ' || email === ' ' || password === ' ') {
 		res.json('Please fill fields').status(422);
-	} else if (firstname && lastname && email && password) {
+	} else if (firstName && lastName && email && password) {
 		const user = database.users.filter(u => u.email === email && u.password === password);
 		if (user.length > 0 && user[0].email) {
 			res.status(409).json('Email and password already taken!');
@@ -52,7 +50,7 @@ app.post('/api/v1/signup', (req, res) =>{
 			res.status(201).json(database.users);
 		}	
 	} else {
-		res.status(400).json('Bad Request');
+		res.status(500).json('Bad Request');
 	}
 	
 });
@@ -64,7 +62,7 @@ app.post('/api/v1/signin', (req, res)=>{
 	else if (req.body.email && req.body.password){
 		res.status(200).json('You are signed in');
 	} else {
-		res.status(400).json('Bad Request');
+		res.status(500).json('Bad Request');
 	}
 });
 
@@ -79,7 +77,7 @@ app.put('/api/v1/entries/:id', (req, res) => {
 		database.entries[req.params.id].message = req.body.message;
 		res.status(200).json({ message: 'Entry has been updated!' });
 	} else {
-		res.status(400).json({ error: 'Invalid request!' });
+		res.status(500).json({ error: 'Invalid request!' });
 	}
 });
 
@@ -87,7 +85,7 @@ app.get('/api/v1/entries', (req, res) => {
 	 if (database.entries) {
 		res.status(200).json(database.entries);
 	} else {
-		res.status(400).json({ error: 'Bad request!' });
+		res.status(500).json({ error: 'Bad request!' });
 	}
 });
 
@@ -97,7 +95,7 @@ app.get('/api/v1/entries/:id', (req, res) => {
 	} else if (database.entries[req.params.id]) {
 		res.status(200).json(database.entries[req.params.id]);
 	} else {
-		res.status(400).json({ error: 'Bad request!' });
+		res.status(500).json({ error: 'Bad request!' });
 	}
 });
 
