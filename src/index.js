@@ -30,7 +30,7 @@ app.post('/api/v1/entries', (req, res) =>{
 		res.status(201).json(database.entries);
 	} 
 	else {
-		res.status(500).json('Bad Request');
+		res.status(500).json('System error');
 	}
 	
 });
@@ -40,7 +40,7 @@ app.post('/api/v1/entries', (req, res) =>{
 app.post('/api/v1/signup', (req, res) =>{
 	const { firstName, lastName, email, password } = req.body;
 	if (firstName === ' ' || lastName === ' ' || email === ' ' || password === ' ') {
-		res.json('Please fill fields').status(422);
+		res.status(422).json('Please fill fields');
 	} else if (firstName && lastName && email && password) {
 		const user = database.users.filter(u => u.email === email && u.password === password);
 		if (user.length > 0 && user[0].email) {
@@ -50,7 +50,7 @@ app.post('/api/v1/signup', (req, res) =>{
 			res.status(201).json(database.users);
 		}	
 	} else {
-		res.status(500).json('Bad Request');
+		res.status(500).json('System error');
 	}
 	
 });
@@ -62,7 +62,7 @@ app.post('/api/v1/signin', (req, res)=>{
 	else if (req.body.email && req.body.password){
 		res.status(200).json('You are signed in');
 	} else {
-		res.status(500).json('Bad Request');
+		res.status(500).json('System error');
 	}
 });
 
@@ -77,7 +77,7 @@ app.put('/api/v1/entries/:id', (req, res) => {
 		database.entries[req.params.id].message = req.body.message;
 		res.status(200).json({ message: 'Entry has been updated!' });
 	} else {
-		res.status(500).json({ error: 'Invalid request!' });
+		res.status(500).json({ error: 'System error' });
 	}
 });
 
@@ -85,7 +85,7 @@ app.get('/api/v1/entries', (req, res) => {
 	 if (database.entries) {
 		res.status(200).json(database.entries);
 	} else {
-		res.status(500).json({ error: 'Bad request!' });
+		res.status(500).json({ error: 'System error' });
 	}
 });
 
@@ -95,7 +95,7 @@ app.get('/api/v1/entries/:id', (req, res) => {
 	} else if (database.entries[req.params.id]) {
 		res.status(200).json(database.entries[req.params.id]);
 	} else {
-		res.status(500).json({ error: 'Bad request!' });
+		res.status(500).json({ error: 'System error' });
 	}
 });
 
