@@ -40,7 +40,7 @@ app.post('/api/v1/entries', (req, res) =>{
 app.post('/api/v1/signup', (req, res) =>{
 	const { firstName, lastName, email, password } = req.body;
 	if (firstName === ' ' || lastName === ' ' || email === ' ' || password === ' ') {
-		res.status(422).json('Please fill fields');
+		res.status(422).json('Invalid parameter');
 	} else if (firstName && lastName && email && password) {
 		const user = database.users.filter(u => u.email === email && u.password === password);
 		if (user.length > 0 && user[0].email) {
@@ -57,7 +57,7 @@ app.post('/api/v1/signup', (req, res) =>{
 
 app.post('/api/v1/signin', (req, res)=>{
 	if (req.body.email === " " || req.body.password === " "){
-		res.status(422).json('Please fill fields');
+		res.status(422).json('	Invalid parameter');
 	}
 	else if (req.body.email && req.body.password){
 		res.status(200).json('You are signed in');
@@ -69,7 +69,7 @@ app.post('/api/v1/signin', (req, res)=>{
 
 app.put('/api/v1/entries/:id', (req, res) => {
 	if (req.body.title === ' ' || req.body.message === ' ') {
-		res.status(422).json({ error: 'Please fill the fields!' });
+		res.status(422).json({ error: '	Invalid parameter' });
 	} else if (!database.entries[req.params.id]) {
 		res.status(404).json('No entry found to be modified');
 	} else if (req.body.title && req.body.message) {
